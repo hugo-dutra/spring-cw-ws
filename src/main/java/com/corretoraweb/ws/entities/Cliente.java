@@ -13,7 +13,6 @@ import javax.validation.constraints.NotNull;
 @Data
 @Entity
 @Table(name = "cliente_clt", schema = "corretora_web")
-@DynamicUpdate()
 public class Cliente {
     @Id
     @Column(name = "clt_id_int", nullable = false)
