@@ -5,6 +5,7 @@ import org.hibernate.validator.constraints.Length;
 
 import javax.persistence.*;
 import javax.validation.constraints.Email;
+import java.util.List;
 
 @Data
 @Entity
@@ -24,4 +25,9 @@ public class Corretora {
     @Column(name = "cta_telefone_txt", length = 13)
     @Length(min = 1, max = 13, message = "Campo telefone deve possuir entre 1 e 13 caracteres")
     private String telefone;
+    /*****RELACIONAMENTOS****/
+    @OneToMany(mappedBy = "corretora")
+    private List<Boleto> boletos;
+    @OneToMany(mappedBy = "corretora")
+    private List<Cliente> clientes;
 }

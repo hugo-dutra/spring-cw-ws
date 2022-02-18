@@ -9,6 +9,7 @@ import org.springframework.context.annotation.Primary;
 import javax.persistence.*;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotNull;
+import java.util.List;
 
 @Data
 @Entity
@@ -44,6 +45,13 @@ public class Cliente {
     @NotNull
     @Column(name = "clt_pessoaFisica_bit")
     private Boolean pessoaFisica;
+    /*****RELACIONAMENTOS****/
+    @ManyToOne()
+    @JoinColumn(name = "cta_id_int", nullable = false)
+    private Corretora corretora;
+    @OneToMany(mappedBy = "cliente")
+    private List<Telefone> telefones;
+
 }
 
 
