@@ -1,6 +1,6 @@
 package com.corretoraweb.ws.entities;
 
-import lombok.Data;
+import lombok.*;
 
 import javax.persistence.*;
 
@@ -18,6 +18,8 @@ public class Telefone {
     private Boolean isWhatsApp;
     @Column(name = "tcl_obsercacao_txt", length = 1000)
     private String observacao;
+    @ToString.Exclude
+    @EqualsAndHashCode.Exclude
     @ManyToOne
     @JoinColumn(name = "clt_id_int", nullable = false)
     private Cliente cliente;

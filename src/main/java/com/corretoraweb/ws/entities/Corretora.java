@@ -1,6 +1,6 @@
 package com.corretoraweb.ws.entities;
 
-import lombok.Data;
+import lombok.*;
 import org.hibernate.validator.constraints.Length;
 
 import javax.persistence.*;
@@ -26,8 +26,12 @@ public class Corretora {
     @Length(min = 1, max = 13, message = "Campo telefone deve possuir entre 1 e 13 caracteres")
     private String telefone;
     /*****RELACIONAMENTOS****/
+    @ToString.Exclude
+    @EqualsAndHashCode.Exclude
     @OneToMany(mappedBy = "corretora")
     private List<Boleto> boletos;
+    @ToString.Exclude
+    @EqualsAndHashCode.Exclude
     @OneToMany(mappedBy = "corretora")
     private List<Cliente> clientes;
 }

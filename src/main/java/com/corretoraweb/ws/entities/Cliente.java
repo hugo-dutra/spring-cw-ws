@@ -1,7 +1,7 @@
 package com.corretoraweb.ws.entities;
 
 import com.corretoraweb.ws.customvalidators.CpfCnpj;
-import lombok.Data;
+import lombok.*;
 import org.hibernate.annotations.DynamicUpdate;
 import org.hibernate.validator.constraints.Length;
 import org.springframework.context.annotation.Primary;
@@ -46,11 +46,17 @@ public class Cliente {
     @Column(name = "clt_pessoaFisica_bit")
     private Boolean pessoaFisica;
     /*****RELACIONAMENTOS****/
+    @ToString.Exclude
+    @EqualsAndHashCode.Exclude
     @ManyToOne()
     @JoinColumn(name = "cta_id_int", nullable = false)
     private Corretora corretora;
+    @ToString.Exclude
+    @EqualsAndHashCode.Exclude
     @OneToMany(mappedBy = "cliente")
     private List<Telefone> telefones;
+    @ToString.Exclude
+    @EqualsAndHashCode.Exclude
     @OneToMany(mappedBy = "cliente")
     private List<Beneficiario> beneficiarios;
 

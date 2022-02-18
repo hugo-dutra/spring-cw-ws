@@ -1,6 +1,6 @@
 package com.corretoraweb.ws.entities;
 
-import lombok.Data;
+import lombok.*;
 
 import javax.persistence.*;
 import java.util.Date;
@@ -20,6 +20,8 @@ public class Boleto {
     @Column(name = "blt_data_vencimento_dte")
     private Date dataVencimento;
     /*****RELACIONAMENTOS****/
+    @ToString.Exclude
+    @EqualsAndHashCode.Exclude
     @ManyToOne
     @JoinColumn(name = "cta_id_int", nullable = false)
     private Corretora corretora;

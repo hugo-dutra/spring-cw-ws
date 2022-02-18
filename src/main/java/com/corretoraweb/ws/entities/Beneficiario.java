@@ -1,9 +1,10 @@
 package com.corretoraweb.ws.entities;
 
 import lombok.Data;
+import lombok.EqualsAndHashCode;
+import lombok.ToString;
 
 import javax.persistence.*;
-import javax.validation.constraints.Max;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Size;
 import java.util.Date;
@@ -30,11 +31,19 @@ public class Beneficiario {
     @Column(name = "bnf_cpf_txt", length = 11)
     private String cpf;
     /****RELACIONAMENTOS****/
+    @ToString.Exclude
+    @EqualsAndHashCode.Exclude
     @ManyToOne
     @JoinColumn(name = "clt_id_int", nullable = false)
     private Cliente cliente;
+    @ToString.Exclude
+    @EqualsAndHashCode.Exclude
     @OneToMany(mappedBy = "beneficiario")
     private List<TelefoneBeneficiario> telefonesBeneficiarios;
+    @ToString.Exclude
+    @EqualsAndHashCode.Exclude
     @OneToMany(mappedBy = "beneficiario")
     private List<Dependente> dependentes;
+
+
 }

@@ -1,10 +1,11 @@
 package com.corretoraweb.ws.entities;
 
-import lombok.Data;
+import lombok.*;
 import org.hibernate.validator.constraints.Length;
 
 import javax.persistence.*;
 import java.util.Date;
+import java.util.List;
 
 @Data
 @Entity
@@ -26,8 +27,14 @@ public class Dependente {
     @Column(name = "dpd_data_nasdimento_dte")
     private Date dataNascimento;
     /****RELACIONAMENTOS****/
+    @ToString.Exclude
+    @EqualsAndHashCode.Exclude
     @ManyToOne
     @JoinColumn(name = "bnf_id_int", nullable = false)
     private Beneficiario beneficiario;
+    @ToString.Exclude
+    @EqualsAndHashCode.Exclude
+    @OneToMany(mappedBy = "dependente")
+    private List<TelefoneDependente> telefonesDependentes;
 
 }

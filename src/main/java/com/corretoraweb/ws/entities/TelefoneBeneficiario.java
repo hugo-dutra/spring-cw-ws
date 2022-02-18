@@ -1,6 +1,6 @@
 package com.corretoraweb.ws.entities;
 
-import lombok.Data;
+import lombok.*;
 import org.hibernate.validator.constraints.Length;
 
 import javax.persistence.*;
@@ -21,6 +21,8 @@ public class TelefoneBeneficiario {
     @Length(max = 500)
     @Column(name = "tbn_observacao_txt", length = 500)
     private String observacao;
+    @ToString.Exclude
+    @EqualsAndHashCode.Exclude
     @ManyToOne
     @JoinColumn(name = "bnf_id_int", nullable = false)
     private Beneficiario beneficiario;
