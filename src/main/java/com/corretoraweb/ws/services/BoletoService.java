@@ -10,13 +10,11 @@ import java.util.List;
 @Service
 @RequiredArgsConstructor
 public class BoletoService {
-    private final BoletoRepository boletoRepository;
+
+    private BoletoRepository boletoRepository;
 
     public List<Boleto> findAll(){
         return boletoRepository.findAll();
     }
 
-    public Boleto save(Boleto boleto){
-        return boletoRepository.save(boleto);
-    }
 }

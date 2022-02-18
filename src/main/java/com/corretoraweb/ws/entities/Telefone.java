@@ -1,16 +1,15 @@
 package com.corretoraweb.ws.entities;
 
-import com.sun.org.apache.xpath.internal.operations.Bool;
 import lombok.Data;
 
 import javax.persistence.*;
 
 @Data
 @Entity
-@Table(name = "telefone_tcl")
+@Table(name = "telefone_tcl", schema = "corretora_web")
 public class Telefone {
     @Id
-    @Column(table = "tcl_id_int")
+    @Column(name = "tcl_id_int", nullable = false)
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     @Column(name = "tcl_telefone_txt", length = 13)
@@ -22,6 +21,4 @@ public class Telefone {
     @ManyToOne
     @JoinColumn(name = "clt_id_int", nullable = false)
     private Cliente cliente;
-
-
 }
