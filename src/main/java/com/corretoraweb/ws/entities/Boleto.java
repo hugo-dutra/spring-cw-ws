@@ -5,7 +5,12 @@ import lombok.*;
 import javax.persistence.*;
 import java.util.Date;
 
-@Data
+@Getter
+@Setter
+@AllArgsConstructor
+@NoArgsConstructor
+@EqualsAndHashCode
+@ToString
 @Entity
 @Table(name = "boleto_blt", schema = "corretora_web")
 public class Boleto {

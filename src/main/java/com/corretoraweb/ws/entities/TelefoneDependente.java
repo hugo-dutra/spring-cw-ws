@@ -5,7 +5,12 @@ import org.hibernate.validator.constraints.Length;
 
 import javax.persistence.*;
 
-@Data
+@Getter
+@Setter
+@AllArgsConstructor
+@NoArgsConstructor
+@EqualsAndHashCode
+@ToString
 @Entity
 @Table(name = "telefone_dependente_tde", schema = "corretora_web")
 public class TelefoneDependente {
@@ -26,5 +31,4 @@ public class TelefoneDependente {
     @ManyToOne
     @JoinColumn(name = "dpd_id_int")
     private Dependente dependente;
-
 }

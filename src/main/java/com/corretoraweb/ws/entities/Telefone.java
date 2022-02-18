@@ -4,7 +4,12 @@ import lombok.*;
 
 import javax.persistence.*;
 
-@Data
+@Getter
+@Setter
+@AllArgsConstructor
+@NoArgsConstructor
+@EqualsAndHashCode
+@ToString
 @Entity
 @Table(name = "telefone_tcl", schema = "corretora_web")
 public class Telefone {

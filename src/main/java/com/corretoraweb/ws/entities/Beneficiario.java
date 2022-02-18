@@ -1,8 +1,6 @@
 package com.corretoraweb.ws.entities;
 
-import lombok.Data;
-import lombok.EqualsAndHashCode;
-import lombok.ToString;
+import lombok.*;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
@@ -10,7 +8,12 @@ import javax.validation.constraints.Size;
 import java.util.Date;
 import java.util.List;
 
-@Data
+@Getter
+@Setter
+@AllArgsConstructor
+@NoArgsConstructor
+@EqualsAndHashCode
+@ToString
 @Entity
 @Table(name = "beneficiario_bnf", schema = "corretora_web")
 public class Beneficiario {

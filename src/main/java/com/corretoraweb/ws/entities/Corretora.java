@@ -7,7 +7,12 @@ import javax.persistence.*;
 import javax.validation.constraints.Email;
 import java.util.List;
 
-@Data
+@Getter
+@Setter
+@AllArgsConstructor
+@NoArgsConstructor
+@EqualsAndHashCode
+@ToString
 @Entity
 @Table(name = "corretora_cta", schema = "corretora_web")
 public class Corretora {

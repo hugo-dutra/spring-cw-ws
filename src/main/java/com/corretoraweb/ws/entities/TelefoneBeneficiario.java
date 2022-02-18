@@ -5,7 +5,12 @@ import org.hibernate.validator.constraints.Length;
 
 import javax.persistence.*;
 
-@Data
+@Getter
+@Setter
+@AllArgsConstructor
+@NoArgsConstructor
+@EqualsAndHashCode
+@ToString
 @Entity
 @Table(name = "telefone_beneficiario_tbn", schema = "corretora_web")
 public class TelefoneBeneficiario {

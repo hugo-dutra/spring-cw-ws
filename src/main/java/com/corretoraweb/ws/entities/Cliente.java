@@ -11,7 +11,12 @@ import javax.validation.constraints.Email;
 import javax.validation.constraints.NotNull;
 import java.util.List;
 
-@Data
+@Getter
+@Setter
+@AllArgsConstructor
+@NoArgsConstructor
+@EqualsAndHashCode
+@ToString
 @Entity
 @Table(name = "cliente_clt", schema = "corretora_web")
 public class Cliente {

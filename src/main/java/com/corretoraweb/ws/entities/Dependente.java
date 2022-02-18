@@ -7,7 +7,12 @@ import javax.persistence.*;
 import java.util.Date;
 import java.util.List;
 
-@Data
+@Getter
+@Setter
+@AllArgsConstructor
+@NoArgsConstructor
+@EqualsAndHashCode
+@ToString
 @Entity
 @Table(name = "dependente_dpd", schema = "corretora_web")
 public class Dependente {
