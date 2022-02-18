@@ -35,4 +35,6 @@ public class Beneficiario {
     private Cliente cliente;
     @OneToMany(mappedBy = "beneficiario")
     private List<TelefoneBeneficiario> telefonesBeneficiarios;
+    @OneToMany(mappedBy = "beneficiario")
+    private List<Dependente> dependentes;
 }
