@@ -51,6 +51,9 @@ public class Cliente {
     private Corretora corretora;
     @OneToMany(mappedBy = "cliente")
     private List<Telefone> telefones;
+    @OneToMany(mappedBy = "cliente")
+    private List<Beneficiario> beneficiarios;
+
 
 }
 
