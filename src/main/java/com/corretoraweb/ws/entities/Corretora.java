@@ -1,5 +1,6 @@
 package com.corretoraweb.ws.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 import org.hibernate.validator.constraints.Length;
 
@@ -34,9 +35,11 @@ public class Corretora {
     @ToString.Exclude
     @EqualsAndHashCode.Exclude
     @OneToMany(mappedBy = "corretora")
+    @JsonIgnore
     private List<Boleto> boletos;
     @ToString.Exclude
     @EqualsAndHashCode.Exclude
     @OneToMany(mappedBy = "corretora")
+    @JsonIgnore
     private List<Cliente> clientes;
 }

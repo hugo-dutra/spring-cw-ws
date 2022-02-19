@@ -13,8 +13,12 @@ public class CorretoraService {
 
     private final CorretoraRepository corretoraRepository;
 
-    public List<Corretora> findAll(){
+    public List<Corretora> findAll() {
         return corretoraRepository.findAll();
+    }
+
+    public Corretora create(Corretora corretora) {
+        return corretoraRepository.save(corretora);
     }
 
 }

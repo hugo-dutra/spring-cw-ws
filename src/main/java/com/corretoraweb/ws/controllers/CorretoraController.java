@@ -4,9 +4,7 @@ import com.corretoraweb.ws.entities.Corretora;
 import com.corretoraweb.ws.services.CorretoraService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -23,6 +21,12 @@ public class CorretoraController {
         return corretoras.size() == 0 ?
                 ResponseEntity.notFound().build() :
                 ResponseEntity.ok(corretoras);
+    }
+
+    @PostMapping
+    public ResponseEntity<Corretora> create(@RequestBody Corretora corretora) {
+        Corretora novaCorretora = corretoraService.create(corretora);
+        return ResponseEntity.ok(novaCorretora);
     }
 
 }

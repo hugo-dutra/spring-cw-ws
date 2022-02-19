@@ -1,5 +1,6 @@
 package com.corretoraweb.ws.controllers;
 
+import com.corretoraweb.ws.dtos.ClienteCreateDTO;
 import com.corretoraweb.ws.entities.Cliente;
 import com.corretoraweb.ws.services.ClienteService;
 import lombok.RequiredArgsConstructor;
@@ -29,8 +30,8 @@ public class ClienteController {
 
     @PostMapping
     @ResponseStatus(CREATED)
-    public ResponseEntity<Cliente> create(@RequestBody Cliente cliente){
-        Cliente novoCliente = clienteService.save(cliente);
+    public ResponseEntity<Cliente> create(@RequestBody ClienteCreateDTO clienteCreateDTO){
+        Cliente novoCliente = clienteService.save(clienteCreateDTO);
         return ResponseEntity.ok(novoCliente);
     }
 
