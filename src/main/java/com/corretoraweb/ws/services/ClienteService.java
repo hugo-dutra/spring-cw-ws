@@ -27,7 +27,7 @@ public class ClienteService {
         Cliente novoCliente = new Cliente();
         Optional<Corretora>  corretora = corretoraRepository.findById(clienteCreateDTO.getCorretora());
         if(!corretora.isPresent()){
-            throw new RegraDeNegocioException("Corretora não encontrada");
+            throw new RegraDeNegocioException("Corretora não encontrada","ClienteService.Create");
         }
         novoCliente.setCep(clienteCreateDTO.getCep());
         novoCliente.setEndereco(clienteCreateDTO.getEndereco());
