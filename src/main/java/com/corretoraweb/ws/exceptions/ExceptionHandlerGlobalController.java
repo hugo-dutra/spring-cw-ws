@@ -36,9 +36,9 @@ public class ExceptionHandlerGlobalController {
     }
 
     @ExceptionHandler(RuntimeException.class)
-    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
     public ResponseEntity<ApiErrors>  HandleRuntimeException(RuntimeException ex){
-        ApiErrors apiErrors = new ApiErrors(ex.getMessage(),ex.getClass().getName(),HttpStatus.BAD_REQUEST.toString());
+        ApiErrors apiErrors = new ApiErrors(ex.getMessage(),ex.getClass().getName(),HttpStatus.INTERNAL_SERVER_ERROR.toString());
         return new ResponseEntity(apiErrors,HttpStatus.BAD_REQUEST);
     }
 

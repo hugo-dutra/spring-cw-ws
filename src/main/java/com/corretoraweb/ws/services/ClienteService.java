@@ -1,6 +1,7 @@
 package com.corretoraweb.ws.services;
 
 import com.corretoraweb.ws.dtos.ClienteCreateDTO;
+import com.corretoraweb.ws.dtos.ClienteUpdateDTO;
 import com.corretoraweb.ws.entities.Cliente;
 import com.corretoraweb.ws.entities.Corretora;
 import com.corretoraweb.ws.exceptions.RegraDeNegocioException;
@@ -19,15 +20,11 @@ public class ClienteService {
     private final ClienteRepository clienteRepository;
     private final CorretoraRepository corretoraRepository;
 
-    public List<Cliente> findAll(){
-        return clienteRepository.findAll();
-    }
-
-    public Cliente save(ClienteCreateDTO clienteCreateDTO){
+    public Cliente create(ClienteCreateDTO clienteCreateDTO){
         Cliente novoCliente = new Cliente();
         Optional<Corretora>  corretora = corretoraRepository.findById(clienteCreateDTO.getCorretora());
         if(!corretora.isPresent()){
-            throw new RegraDeNegocioException("Corretora não encontrada","ClienteService.Create");
+            throw new RegraDeNegocioException("Cliente não encontrado","ClienteService.Create");
         }
         novoCliente.setCep(clienteCreateDTO.getCep());
         novoCliente.setEndereco(clienteCreateDTO.getEndereco());
@@ -39,6 +36,36 @@ public class ClienteService {
         novoCliente.setPessoaFisica(clienteCreateDTO.getPessoaFisica());
         novoCliente.setCorretora(corretora.get());
         return clienteRepository.save(novoCliente);
+    }
+
+    public List<Cliente> findAll(){
+        return clienteRepository.findAll();
+    }
+
+    public Cliente update(ClienteUpdateDTO clienteUpdateDTO){
+        Optional<Cliente>  cliente = clienteRepository.findById(clienteUpdateDTO.getId());
+        if(!cliente.isPresent()){
+            throw new RegraDeNegocioException("Cliente não encontrada","ClienteService.update");
+        }
+        Cliente clienteAlterado = cliente.get();
+        clienteAlterado.setCep(clienteUpdateDTO.getCep());
+        clienteAlterado.setEndereco(clienteUpdateDTO.getEndereco());
+        clienteAlterado.setCidade(clienteUpdateDTO.getCidade());
+        clienteAlterado.setUf(clienteUpdateDTO.getUf());
+        clienteAlterado.setEmail(clienteUpdateDTO.getEmail());
+        clienteAlterado.setNome(clienteUpdateDTO.getNome());
+        clienteAlterado.setCpfCnpj(clienteUpdateDTO.getCpfCnpj());
+        clienteAlterado.setPessoaFisica(clienteUpdateDTO.getPessoaFisica());
+        clienteAlterado.setId(clienteAlterado.getId());
+        return clienteRepository.save(clienteAlterado);
+    }
+
+    public void delete(Long id){
+        Optional<Cliente>  cliente = clienteRepository.findById(id);
+        if(!cliente.isPresent()){
+            throw new RegraDeNegocioException("Cliente não encontrado","ClienteService.delete");
+        }
+        clienteRepository.deleteById(id);
     }
 
 
