@@ -2,9 +2,7 @@ package com.corretoraweb.ws.entities;
 
 import com.corretoraweb.ws.customvalidators.CpfCnpj;
 import lombok.*;
-import org.hibernate.annotations.DynamicUpdate;
 import org.hibernate.validator.constraints.Length;
-import org.springframework.context.annotation.Primary;
 
 import javax.persistence.*;
 import javax.validation.constraints.Email;
@@ -64,8 +62,6 @@ public class Cliente {
     @EqualsAndHashCode.Exclude
     @OneToMany(mappedBy = "cliente")
     private List<Beneficiario> beneficiarios;
-
-
 }
 
 
