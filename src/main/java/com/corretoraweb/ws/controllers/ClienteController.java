@@ -50,6 +50,15 @@ public class ClienteController {
                 ResponseEntity.ok(clientes);
     }
 
+    @GetMapping("/filtrar")
+    @ResponseStatus(OK)
+    public ResponseEntity<List<Cliente>> findByCorretoraId(@RequestBody Cliente cliente) {
+        List<Cliente> clientes = clienteService.filterCliente(cliente);
+        return clientes.size() == 0 ?
+                ResponseEntity.noContent().build() :
+                ResponseEntity.ok(clientes);
+    }
+
     @PostMapping
     @ResponseStatus(CREATED)
     public ResponseEntity<Cliente> create(@RequestBody ClienteCreateDTO clienteCreateDTO){

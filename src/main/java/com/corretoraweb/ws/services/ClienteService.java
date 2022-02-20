@@ -8,6 +8,8 @@ import com.corretoraweb.ws.exceptions.RegraDeNegocioException;
 import com.corretoraweb.ws.repositories.ClienteRepository;
 import com.corretoraweb.ws.repositories.CorretoraRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Example;
+import org.springframework.data.domain.ExampleMatcher;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -48,6 +50,16 @@ public class ClienteService {
 
     public List<Cliente>  findByCorretoraId(Long id){
         return clienteRepository.findByCorretoraId(id);
+    }
+
+    public List<Cliente>  filterCliente(Cliente cliente){
+        ExampleMatcher exampleMatcher = ExampleMatcher
+                .matching()
+                .withIgnoreCase()
+                .withStringMatcher(ExampleMatcher.StringMatcher.CONTAINING);
+        Example<Cliente> clienteExample = Example.of(cliente,exampleMatcher);
+        List<Cliente> clientes = clienteRepository.findAll(clienteExample);
+        return clientes;
     }
 
     public Cliente update(ClienteUpdateDTO clienteUpdateDTO){
