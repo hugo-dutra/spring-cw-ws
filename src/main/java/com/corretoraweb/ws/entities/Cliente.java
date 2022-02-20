@@ -1,6 +1,7 @@
 package com.corretoraweb.ws.entities;
 
 import com.corretoraweb.ws.customvalidators.CpfCnpj;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 import org.hibernate.validator.constraints.Length;
 
@@ -57,11 +58,18 @@ public class Cliente {
     @ToString.Exclude
     @EqualsAndHashCode.Exclude
     @OneToMany(mappedBy = "cliente")
+    @JsonIgnore
     private List<Telefone> telefones;
     @ToString.Exclude
     @EqualsAndHashCode.Exclude
     @OneToMany(mappedBy = "cliente")
+    @JsonIgnore
     private List<Beneficiario> beneficiarios;
+    @ToString.Exclude
+    @EqualsAndHashCode.Exclude
+    @ManyToOne
+    @JoinColumn(name = "usr_id_int")
+    private Usuario usuario;
 }
 
 
