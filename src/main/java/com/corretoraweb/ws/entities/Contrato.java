@@ -31,4 +31,14 @@ public class Contrato {
     private Double valorDesconto;
     @Column(name = "ctr_data_assinatura_contrato_dte")
     private Date dataAssinaturaContrato;
+    @ToString.Exclude
+    @EqualsAndHashCode.Exclude
+    @ManyToOne
+    @JoinColumn(name = "usr_id_int")
+    private Usuario usuario;
+    @ToString.Exclude
+    @EqualsAndHashCode.Exclude
+    @ManyToOne
+    @JoinColumn(name = "mop_id_int")
+    private ModalidadePlano modalidadePlano;
 }

@@ -50,5 +50,10 @@ public class Usuario {
     @ManyToOne
     @JoinColumn(name = "per_id_int")
     private Perfil perfil;
+    @ToString.Exclude
+    @EqualsAndHashCode.Exclude
+    @OneToMany(mappedBy = "usuario")
+    @JsonIgnore
+    private List<Contrato>  contrato;
 
 }
