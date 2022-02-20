@@ -47,5 +47,9 @@ public class Corretora {
     @OneToMany(mappedBy = "corretora")
     @JsonIgnore
     private List<Usuario> usuarios;
-
+    @ToString.Exclude
+    @EqualsAndHashCode.Exclude
+    @OneToMany(mappedBy = "corretora")
+    @JsonIgnore
+    private List<Perfil> perfis;
 }

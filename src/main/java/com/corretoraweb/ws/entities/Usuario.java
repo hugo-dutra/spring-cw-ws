@@ -45,16 +45,10 @@ public class Usuario {
     @OneToMany(mappedBy = "usuario")
     @JsonIgnore
     private List<Cliente> cliente;
-
-
-
-
-    /*
-    @ManyToOne(type => Perfil, perfil => perfil.usuarios)
-    @JoinColumn({ name: 'per_id_int' })
-    perfil: Perfil;
-    @OneToMany(type => Contrato, contrato => contrato.usuario)
-    contratos: Contrato[]
-    */
+    @ToString.Exclude
+    @EqualsAndHashCode.Exclude
+    @ManyToOne
+    @JoinColumn(name = "per_id_int")
+    private Perfil perfil;
 
 }
