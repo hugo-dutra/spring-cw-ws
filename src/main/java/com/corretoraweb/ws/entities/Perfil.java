@@ -2,6 +2,7 @@ package com.corretoraweb.ws.entities;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
+import org.hibernate.validator.constraints.Length;
 
 import javax.persistence.*;
 import java.util.List;
@@ -19,7 +20,8 @@ public class Perfil {
     @Column(name = "per_id_int")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    @Column(name = "per_nome_txt")
+    @Length(max = 255, message = "nome: Pode ter no máximo 255 caracteres")
+    @Column(name = "per_nome_txt", length = 255)
     private String nome;
     /****RELACIONAMENTOS****/
     @ToString.Exclude

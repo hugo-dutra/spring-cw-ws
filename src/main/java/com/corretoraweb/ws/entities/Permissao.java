@@ -6,6 +6,7 @@ import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
+import org.hibernate.validator.constraints.Length;
 
 import javax.persistence.*;
 import java.util.List;
@@ -21,7 +22,8 @@ public class Permissao {
     @Column(name = "prm_id_int")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    @Column(name = "prm_nome_txt")
+    @Length(max = 255, message = "nome: pode ter no máximo 255 caracteres")
+    @Column(name = "prm_nome_txt", length = 255)
     private String nome;
     /****RELACIONAMENTOS****/
     @ToString.Exclude
