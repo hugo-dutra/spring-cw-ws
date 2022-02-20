@@ -1,7 +1,7 @@
 package com.corretoraweb.ws.services;
 
-import com.corretoraweb.ws.dtos.ClienteCreateDTO;
-import com.corretoraweb.ws.dtos.ClienteUpdateDTO;
+import com.corretoraweb.ws.dtos.cliente.ClienteCreateDTO;
+import com.corretoraweb.ws.dtos.cliente.ClienteUpdateDTO;
 import com.corretoraweb.ws.entities.Cliente;
 import com.corretoraweb.ws.entities.Corretora;
 import com.corretoraweb.ws.exceptions.RegraDeNegocioException;
@@ -40,6 +40,14 @@ public class ClienteService {
 
     public List<Cliente> findAll(){
         return clienteRepository.findAll();
+    }
+
+    public Optional<Cliente>  findById(Long id){
+        return clienteRepository.findById(id);
+    }
+
+    public List<Cliente>  findByCorretoraId(Long id){
+        return clienteRepository.findByCorretoraId(id);
     }
 
     public Cliente update(ClienteUpdateDTO clienteUpdateDTO){

@@ -1,4 +1,4 @@
-package com.corretoraweb.ws.dtos;
+package com.corretoraweb.ws.dtos.cliente;
 
 import com.corretoraweb.ws.customvalidators.CpfCnpj;
 import lombok.Getter;
