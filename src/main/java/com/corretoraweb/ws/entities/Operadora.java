@@ -28,4 +28,9 @@ public class Operadora {
     @OneToMany(mappedBy = "operadora")
     @JsonIgnore
     private List<ModalidadePlano> modalidadesPlanos;
+    @ToString.Exclude
+    @EqualsAndHashCode.Exclude
+    @ManyToOne
+    @JoinColumn(name = "cta_id_int", nullable = false)
+    private Corretora corretora;
 }

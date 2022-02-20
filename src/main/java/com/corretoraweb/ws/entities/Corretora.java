@@ -52,4 +52,9 @@ public class Corretora {
     @OneToMany(mappedBy = "corretora")
     @JsonIgnore
     private List<Perfil> perfis;
+    @ToString.Exclude
+    @EqualsAndHashCode.Exclude
+    @OneToMany(mappedBy = "corretora")
+    @JsonIgnore
+    private List<Operadora> operadoras;
 }
