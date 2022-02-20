@@ -22,4 +22,5 @@ public class ClasseContrato {
     @Length(max = 255, message = "nome: Deve ter no máximo 255 caracteres")
     @Column(name = "clc_nome_txt", length = 255)
     private String nome;
+    /****RELACIONAMENTOS****/
 }

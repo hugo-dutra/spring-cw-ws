@@ -57,4 +57,9 @@ public class Corretora {
     @OneToMany(mappedBy = "corretora")
     @JsonIgnore
     private List<Operadora> operadoras;
+    @ToString.Exclude
+    @EqualsAndHashCode.Exclude
+    @OneToMany(mappedBy = "corretora")
+    @JsonIgnore
+    private List<TipoContrato> tiposContrato;
 }

@@ -41,4 +41,9 @@ public class Contrato {
     @ManyToOne
     @JoinColumn(name = "mop_id_int")
     private ModalidadePlano modalidadePlano;
+    @ToString.Exclude
+    @EqualsAndHashCode.Exclude
+    @ManyToOne
+    @JoinColumn(name = "tco_id_int")
+    private TipoContrato tipoContrato;
 }
