@@ -62,4 +62,25 @@ public class Corretora {
     @OneToMany(mappedBy = "corretora")
     @JsonIgnore
     private List<TipoContrato> tiposContrato;
+    @ToString.Exclude
+    @EqualsAndHashCode.Exclude
+    @OneToMany(mappedBy = "corretora")
+    @JsonIgnore
+    private List<ClasseContrato> classesContratos;
+    @ToString.Exclude
+    @EqualsAndHashCode.Exclude
+    @OneToMany(mappedBy = "corretora")
+    @JsonIgnore
+    private List<Administradora> administradoras;
+    @ToString.Exclude
+    @EqualsAndHashCode.Exclude
+    @OneToMany(mappedBy = "corretora")
+    @JsonIgnore
+    private List<TipoPagamento> tiposPagamentos;
+    @ToString.Exclude
+    @EqualsAndHashCode.Exclude
+    @OneToMany(mappedBy = "corretora")
+    @JsonIgnore
+    private List<TipoComissao> tiposComissoes;
+
 }

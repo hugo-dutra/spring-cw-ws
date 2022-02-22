@@ -1,5 +1,6 @@
 package com.corretoraweb.ws.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
@@ -8,6 +9,7 @@ import org.hibernate.validator.constraints.Length;
 
 import javax.persistence.*;
 import java.util.Date;
+import java.util.List;
 
 @Getter
 @Setter
@@ -31,6 +33,7 @@ public class Contrato {
     private Double valorDesconto;
     @Column(name = "ctr_data_assinatura_contrato_dte")
     private Date dataAssinaturaContrato;
+    /****RELACIONAMENTOS****/
     @ToString.Exclude
     @EqualsAndHashCode.Exclude
     @ManyToOne
@@ -46,4 +49,19 @@ public class Contrato {
     @ManyToOne
     @JoinColumn(name = "tco_id_int")
     private TipoContrato tipoContrato;
+    @ToString.Exclude
+    @EqualsAndHashCode.Exclude
+    @ManyToOne
+    @JoinColumn(name = "clc_id_int")
+    private ClasseContrato classeContrato;
+    @ToString.Exclude
+    @EqualsAndHashCode.Exclude
+    @ManyToOne
+    @JoinColumn(name = "adm_id_int")
+    private Administradora administradora;
+    @ToString.Exclude
+    @EqualsAndHashCode.Exclude
+    @OneToMany(mappedBy = "contrato")
+    @JsonIgnore
+    private List<Comissao> comissoes;
 }

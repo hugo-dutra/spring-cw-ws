@@ -35,4 +35,10 @@ public class TipoContrato {
     @OneToMany(mappedBy = "tipoContrato")
     @JsonIgnore
     private List<Contrato> contratos;
+    @ToString.Exclude
+    @EqualsAndHashCode.Exclude
+    @OneToMany(mappedBy = "tipoContrato")
+    @JsonIgnore
+    private List<ClasseContrato>  classesContratos;
+
 }

@@ -1,15 +1,14 @@
 package com.corretoraweb.ws.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
 import org.hibernate.validator.constraints.Length;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
+import java.util.List;
 
 @Getter
 @Setter
@@ -26,4 +25,15 @@ public class TipoComissao {
     private String nome;
     @Column(name = "tcm_percentual_associado_num")
     private Double percentualAssociado;
+    /****RELACIONAMENTOS****/
+    @ToString.Exclude
+    @EqualsAndHashCode.Exclude
+    @ManyToOne
+    @JoinColumn(name = "cta_id_int")
+    private Corretora corretora;
+    @ToString.Exclude
+    @EqualsAndHashCode.Exclude
+    @OneToMany(mappedBy = "tipoComissao")
+    @JsonIgnore
+    private List<Comissao> comissoes;
 }
