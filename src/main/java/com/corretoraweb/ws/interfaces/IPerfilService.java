@@ -1,5 +1,6 @@
 package com.corretoraweb.ws.interfaces;
 
+import com.corretoraweb.ws.dtos.perfil.PerfilCreateDTO;
 import com.corretoraweb.ws.entities.Perfil;
 
 import javax.swing.text.html.Option;
@@ -9,4 +10,5 @@ import java.util.Optional;
 public interface IPerfilService {
     public Optional<Perfil> findById(Long perfilId);
     public List<Perfil> findByCorretoraId(Long corretoraId);
+    public Perfil create(PerfilCreateDTO perfil);
 }

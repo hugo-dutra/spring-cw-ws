@@ -29,6 +29,8 @@ public class Perfil {
     @OneToMany(mappedBy = "perfil")
     @JsonIgnore
     private List<Usuario> usuarios;
+    @ToString.Exclude
+    @EqualsAndHashCode.Exclude
     @ManyToOne
     @JoinColumn(name = "cta_id_int")
     private Corretora corretora;

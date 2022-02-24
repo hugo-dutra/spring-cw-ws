@@ -8,6 +8,8 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import static org.springframework.http.HttpStatus.*;
+
 import java.util.List;
 
 @RestController
@@ -17,6 +19,7 @@ public class UsuarioController {
     private final IUsuarioService iUsuarioService;
 
     @GetMapping("/corretora/{corretoraId}")
+    @ResponseStatus(OK)
     public ResponseEntity<List<Usuario>> findByCorretoraId(@PathVariable Long corretoraId) {
         List<Usuario> usuarios = iUsuarioService.findByCorretoraId(corretoraId);
         return (usuarios.size() == 0) ?
@@ -25,6 +28,7 @@ public class UsuarioController {
     }
 
     @PostMapping
+    @ResponseStatus(CREATED)
     public ResponseEntity<Usuario> create(@RequestBody UsuarioCreateDTO usuario){
         Usuario novoUsuario = iUsuarioService.create(usuario);
         return ResponseEntity.ok(novoUsuario);
