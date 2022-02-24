@@ -3,6 +3,7 @@ package com.corretoraweb.ws.controllers;
 import com.corretoraweb.ws.dtos.cliente.ClienteCreateDTO;
 import com.corretoraweb.ws.dtos.cliente.ClienteUpdateDTO;
 import com.corretoraweb.ws.entities.Cliente;
+import com.corretoraweb.ws.interfaces.IClienteService;
 import com.corretoraweb.ws.services.ClienteService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -20,12 +21,12 @@ import static org.springframework.http.HttpStatus.OK;
 @RequiredArgsConstructor
 public class ClienteController {
 
-    private final ClienteService clienteService;
+    private final IClienteService iClienteService;
 
     @GetMapping
     @ResponseStatus(OK)
     public ResponseEntity<List<Cliente>> findAll(){
-        List<Cliente> clientes = clienteService.findAll();
+        List<Cliente> clientes = iClienteService.findAll();
         return clientes.size()==0 ?
                 ResponseEntity.noContent().build() :
                 ResponseEntity.ok(clientes);
@@ -34,7 +35,7 @@ public class ClienteController {
     @GetMapping("/{id}")
     @ResponseStatus(OK)
     public ResponseEntity<Cliente> findById(@PathVariable Long id){
-        Optional<Cliente> cliente = clienteService.findById(id);
+        Optional<Cliente> cliente = iClienteService.findById(id);
         if(!cliente.isPresent()){
             return ResponseEntity.notFound().build();
         }
@@ -44,7 +45,7 @@ public class ClienteController {
     @GetMapping("/corretora/{id}")
     @ResponseStatus(OK)
     public ResponseEntity<List<Cliente>> findByCorretoraId(@PathVariable Long id) {
-        List<Cliente> clientes = clienteService.findByCorretoraId(id);
+        List<Cliente> clientes = iClienteService.findByCorretoraId(id);
         return clientes.size() == 0 ?
                 ResponseEntity.noContent().build() :
                 ResponseEntity.ok(clientes);
@@ -53,7 +54,7 @@ public class ClienteController {
     @GetMapping("/filtrar")
     @ResponseStatus(OK)
     public ResponseEntity<List<Cliente>> findByCorretoraId(@RequestBody Cliente cliente) {
-        List<Cliente> clientes = clienteService.filterCliente(cliente);
+        List<Cliente> clientes = iClienteService.filterCliente(cliente);
         return clientes.size() == 0 ?
                 ResponseEntity.noContent().build() :
                 ResponseEntity.ok(clientes);
@@ -62,21 +63,21 @@ public class ClienteController {
     @PostMapping
     @ResponseStatus(CREATED)
     public ResponseEntity<Cliente> create(@RequestBody ClienteCreateDTO clienteCreateDTO){
-        Cliente novoCliente = clienteService.create(clienteCreateDTO);
+        Cliente novoCliente = iClienteService.create(clienteCreateDTO);
         return ResponseEntity.ok(novoCliente);
     }
 
     @PutMapping
     @ResponseStatus(OK)
     public ResponseEntity<Cliente> update(@RequestBody ClienteUpdateDTO clienteUpdateDTO){
-        Cliente clienteAlterado = clienteService.update(clienteUpdateDTO);
+        Cliente clienteAlterado = iClienteService.update(clienteUpdateDTO);
         return ResponseEntity.ok(clienteAlterado);
     }
 
     @DeleteMapping("/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public ResponseEntity<Void> delete(@PathVariable Long id){
-        clienteService.delete(id);
+        iClienteService.delete(id);
         return ResponseEntity.noContent().build();
     }
 

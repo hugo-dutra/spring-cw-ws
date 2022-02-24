@@ -8,24 +8,30 @@ import com.corretoraweb.ws.interfaces.ICorretoraService;
 import com.corretoraweb.ws.interfaces.ICypher;
 import com.corretoraweb.ws.interfaces.IPerfilService;
 import com.corretoraweb.ws.interfaces.IUsuarioService;
-import com.corretoraweb.ws.repositories.UsuarioRepository;
+import com.corretoraweb.ws.repositories.IUsuarioRepository;
 import lombok.RequiredArgsConstructor;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
 public class UsuarioService implements IUsuarioService {
-    private final UsuarioRepository usuarioRepository;
+    private final IUsuarioRepository usuarioRepository;
     private final ICypher iCypher;
     private final ICorretoraService iCorretoraService;
     private final IPerfilService iPerfilService;
 
     @Override
-    public List<Usuario> findByCorretoraId(Long corretoraId){
-        List<Usuario> usuarios = usuarioRepository.findByCorretoraId(corretoraId);
+    public List<Usuario> findByCorretoraId(Long corretoraId) {
+        List<Usuario> usuarios = usuarioRepository
+                .findByCorretoraId(corretoraId)
+                .stream()
+                .map(usuario -> {
+                    return cleanPasswordAndSalt(usuario);
+                })
+                .collect(Collectors.toList());
         return usuarios;
     }
 

@@ -1,6 +1,7 @@
 package com.corretoraweb.ws.controllers;
 
 import com.corretoraweb.ws.entities.Boleto;
+import com.corretoraweb.ws.interfaces.IBoletoService;
 import com.corretoraweb.ws.services.BoletoService;
 import lombok.RequiredArgsConstructor;
 import org.apache.coyote.Response;
@@ -17,11 +18,11 @@ import java.util.List;
 @RequiredArgsConstructor
 public class BoletoController {
 
-    private final BoletoService boletoService;
+    private final IBoletoService iBoletoService;
 
     @GetMapping
     public ResponseEntity<List<Boleto>> findAll(){
-        List<Boleto> boletos = boletoService.findAll();
+        List<Boleto> boletos = iBoletoService.findAll();
         return boletos.size() == 0 ?
                 ResponseEntity.noContent().build() :
                 ResponseEntity.ok(boletos);
@@ -29,7 +30,7 @@ public class BoletoController {
 
     @GetMapping("/corretora/{id}")
     public ResponseEntity<List<Boleto>> findByCorretoraId(@PathVariable Long id){
-        List<Boleto> boletos = boletoService.findByCorretoraId(id);
+        List<Boleto> boletos = iBoletoService.findByCorretoraId(id);
         return boletos.size() == 0 ?
                 ResponseEntity.noContent().build() :
                 ResponseEntity.ok(boletos);

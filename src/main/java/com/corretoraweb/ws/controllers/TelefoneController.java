@@ -17,7 +17,7 @@ public class TelefoneController {
 
     private ResponseEntity<List<Telefone>> findAll(){
         List<Telefone> telefones = telefoneService.findAll();
-        return telefones.size() == 0 ?
+        return (telefones.size() == 0) ?
                 ResponseEntity.noContent().build() :
                 ResponseEntity.ok(telefones);
     }

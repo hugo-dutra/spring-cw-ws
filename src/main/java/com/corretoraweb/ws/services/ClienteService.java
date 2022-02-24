@@ -5,8 +5,9 @@ import com.corretoraweb.ws.dtos.cliente.ClienteUpdateDTO;
 import com.corretoraweb.ws.entities.Cliente;
 import com.corretoraweb.ws.entities.Corretora;
 import com.corretoraweb.ws.exceptions.RegraDeNegocioException;
-import com.corretoraweb.ws.repositories.ClienteRepository;
-import com.corretoraweb.ws.repositories.CorretoraRepository;
+import com.corretoraweb.ws.interfaces.IClienteService;
+import com.corretoraweb.ws.repositories.IClienteRepository;
+import com.corretoraweb.ws.repositories.ICorretoraRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Example;
 import org.springframework.data.domain.ExampleMatcher;
@@ -17,14 +18,14 @@ import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
-public class ClienteService {
+public class ClienteService implements IClienteService {
 
-    private final ClienteRepository clienteRepository;
-    private final CorretoraRepository corretoraRepository;
+    private final IClienteRepository iClienteRepository;
+    private final ICorretoraRepository iCorretoraRepository;
 
     public Cliente create(ClienteCreateDTO clienteCreateDTO){
         Cliente novoCliente = new Cliente();
-        Optional<Corretora>  corretora = corretoraRepository.findById(clienteCreateDTO.getCorretora());
+        Optional<Corretora>  corretora = iCorretoraRepository.findById(clienteCreateDTO.getCorretora());
         if(!corretora.isPresent()){
             throw new RegraDeNegocioException("Cliente não encontrado","ClienteService.Create");
         }
@@ -37,19 +38,19 @@ public class ClienteService {
         novoCliente.setCpfCnpj(clienteCreateDTO.getCpfCnpj());
         novoCliente.setPessoaFisica(clienteCreateDTO.getPessoaFisica());
         novoCliente.setCorretora(corretora.get());
-        return clienteRepository.save(novoCliente);
+        return iClienteRepository.save(novoCliente);
     }
 
     public List<Cliente> findAll(){
-        return clienteRepository.findAll();
+        return iClienteRepository.findAll();
     }
 
     public Optional<Cliente>  findById(Long id){
-        return clienteRepository.findById(id);
+        return iClienteRepository.findById(id);
     }
 
     public List<Cliente>  findByCorretoraId(Long id){
-        return clienteRepository.findByCorretoraId(id);
+        return iClienteRepository.findByCorretoraId(id);
     }
 
     public List<Cliente>  filterCliente(Cliente cliente){
@@ -58,12 +59,12 @@ public class ClienteService {
                 .withIgnoreCase()
                 .withStringMatcher(ExampleMatcher.StringMatcher.CONTAINING);
         Example<Cliente> clienteExample = Example.of(cliente,exampleMatcher);
-        List<Cliente> clientes = clienteRepository.findAll(clienteExample);
+        List<Cliente> clientes = iClienteRepository.findAll(clienteExample);
         return clientes;
     }
 
     public Cliente update(ClienteUpdateDTO clienteUpdateDTO){
-        Optional<Cliente>  cliente = clienteRepository.findById(clienteUpdateDTO.getId());
+        Optional<Cliente>  cliente = iClienteRepository.findById(clienteUpdateDTO.getId());
         if(!cliente.isPresent()){
             throw new RegraDeNegocioException("Cliente não encontrada","ClienteService.update");
         }
@@ -77,15 +78,15 @@ public class ClienteService {
         clienteAlterado.setCpfCnpj(clienteUpdateDTO.getCpfCnpj());
         clienteAlterado.setPessoaFisica(clienteUpdateDTO.getPessoaFisica());
         clienteAlterado.setId(clienteAlterado.getId());
-        return clienteRepository.save(clienteAlterado);
+        return iClienteRepository.save(clienteAlterado);
     }
 
     public void delete(Long id){
-        Optional<Cliente>  cliente = clienteRepository.findById(id);
+        Optional<Cliente>  cliente = iClienteRepository.findById(id);
         if(!cliente.isPresent()){
             throw new RegraDeNegocioException("Cliente não encontrado","ClienteService.delete");
         }
-        clienteRepository.deleteById(id);
+        iClienteRepository.deleteById(id);
     }
 
 
