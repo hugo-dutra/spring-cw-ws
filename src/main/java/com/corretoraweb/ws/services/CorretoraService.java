@@ -2,6 +2,7 @@ package com.corretoraweb.ws.services;
 
 import com.corretoraweb.ws.entities.Corretora;
 import com.corretoraweb.ws.exceptions.RegraDeNegocioException;
+import com.corretoraweb.ws.interfaces.ICorretoraService;
 import com.corretoraweb.ws.repositories.CorretoraRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -11,7 +12,7 @@ import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
-public class CorretoraService {
+public class CorretoraService implements ICorretoraService {
 
     private final CorretoraRepository corretoraRepository;
 
@@ -41,6 +42,15 @@ public class CorretoraService {
             throw new RegraDeNegocioException("Corretora não encontrada","CorretoraService.delete");
         }
         corretoraRepository.deleteById(id);
+    }
+
+    @Override
+    public Corretora findById(Long corretoraId) {
+        Optional<Corretora> corretora = corretoraRepository.findById(corretoraId);
+        if(!corretora.isPresent()){
+            throw new RegraDeNegocioException("Corretora não encontrada","CorretoraService.findById");
+        }
+        return corretora.get();
     }
 
 }

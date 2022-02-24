@@ -16,5 +16,8 @@ public class BoletoService {
     public List<Boleto> findAll(){
         return boletoRepository.findAll();
     }
+    public List<Boleto> findByCorretoraId(Long id){
+        return boletoRepository.findByCorretoraId(id);
+    }
 
 }

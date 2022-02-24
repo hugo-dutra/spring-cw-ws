@@ -1,14 +1,34 @@
 package com.corretoraweb.ws.controllers;
 
-import com.corretoraweb.ws.services.UsuarioService;
+import com.corretoraweb.ws.dtos.usuario.UsuarioCreateDTO;
+import com.corretoraweb.ws.entities.Usuario;
+import com.corretoraweb.ws.interfaces.ICypher;
+import com.corretoraweb.ws.interfaces.IUsuarioService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("/usuarios")
 @RequiredArgsConstructor
 public class UsuarioController {
-    private final UsuarioService usuarioService;
+    private final IUsuarioService iUsuarioService;
+
+    @GetMapping("/corretora/{corretoraId}")
+    public ResponseEntity<List<Usuario>> findByCorretoraId(@PathVariable Long corretoraId){
+        List<Usuario> usuarios = iUsuarioService.findByCorretoraId(corretoraId);
+        if(usuarios.size()==0){
+           return ResponseEntity.noContent().build();
+        }
+        return  ResponseEntity.ok(usuarios);
+    }
+
+    @PostMapping
+    public ResponseEntity<Usuario> create(@RequestBody UsuarioCreateDTO usuario){
+        Usuario novoUsuario = iUsuarioService.create(usuario);
+        return ResponseEntity.ok(novoUsuario);
+    }
 
 }
