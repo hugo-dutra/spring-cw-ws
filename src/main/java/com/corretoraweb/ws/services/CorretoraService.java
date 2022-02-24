@@ -45,12 +45,12 @@ public class CorretoraService implements ICorretoraService {
     }
 
     @Override
-    public Corretora findById(Long corretoraId) {
+    public Optional<Corretora>  findById(Long corretoraId) {
         Optional<Corretora> corretora = iCorretoraRepository.findById(corretoraId);
         if(!corretora.isPresent()){
             throw new RegraDeNegocioException("Corretora não encontrada","CorretoraService.findById");
         }
-        return corretora.get();
+        return corretora;
     }
 
 }

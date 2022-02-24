@@ -17,12 +17,11 @@ public class BeneficiarioController {
     private final IBeneficiarioService iBeneficiarioService;
 
     @GetMapping
-    public ResponseEntity<List<Beneficiario>>  findAll(){
+    public ResponseEntity<List<Beneficiario>>  findAll() {
         List<Beneficiario> beneficiarios = iBeneficiarioService.findAll();
-        if(beneficiarios.size()==0){
-            return ResponseEntity.noContent().build();
-        }
-        return ResponseEntity.ok(beneficiarios);
+        return (beneficiarios.size() == 0) ?
+                ResponseEntity.noContent().build() :
+                ResponseEntity.ok(beneficiarios);
     }
 
 }

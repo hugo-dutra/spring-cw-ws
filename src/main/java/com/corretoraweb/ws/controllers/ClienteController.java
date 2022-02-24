@@ -34,12 +34,11 @@ public class ClienteController {
 
     @GetMapping("/{id}")
     @ResponseStatus(OK)
-    public ResponseEntity<Cliente> findById(@PathVariable Long id){
+    public ResponseEntity<Cliente> findById(@PathVariable Long id) {
         Optional<Cliente> cliente = iClienteService.findById(id);
-        if(!cliente.isPresent()){
-            return ResponseEntity.notFound().build();
-        }
-        return ResponseEntity.ok(cliente.get());
+        return (!cliente.isPresent()) ?
+                ResponseEntity.notFound().build() :
+                ResponseEntity.ok(cliente.get());
     }
 
     @GetMapping("/corretora/{id}")

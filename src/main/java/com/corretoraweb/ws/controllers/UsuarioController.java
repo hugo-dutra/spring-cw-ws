@@ -17,12 +17,11 @@ public class UsuarioController {
     private final IUsuarioService iUsuarioService;
 
     @GetMapping("/corretora/{corretoraId}")
-    public ResponseEntity<List<Usuario>> findByCorretoraId(@PathVariable Long corretoraId){
+    public ResponseEntity<List<Usuario>> findByCorretoraId(@PathVariable Long corretoraId) {
         List<Usuario> usuarios = iUsuarioService.findByCorretoraId(corretoraId);
-        if(usuarios.size()==0){
-           return ResponseEntity.noContent().build();
-        }
-        return  ResponseEntity.ok(usuarios);
+        return (usuarios.size() == 0) ?
+                ResponseEntity.noContent().build() :
+                ResponseEntity.ok(usuarios);
     }
 
     @PostMapping

@@ -4,6 +4,7 @@ import com.corretoraweb.ws.dtos.usuario.UsuarioCreateDTO;
 import com.corretoraweb.ws.entities.Corretora;
 import com.corretoraweb.ws.entities.Perfil;
 import com.corretoraweb.ws.entities.Usuario;
+import com.corretoraweb.ws.exceptions.RegraDeNegocioException;
 import com.corretoraweb.ws.interfaces.ICorretoraService;
 import com.corretoraweb.ws.interfaces.ICypher;
 import com.corretoraweb.ws.interfaces.IPerfilService;
@@ -13,6 +14,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
@@ -41,10 +43,16 @@ public class UsuarioService implements IUsuarioService {
         novoUsuario.setNome(usuario.getNome());
         novoUsuario.setEmail(usuario.getEmail());
         novoUsuario.setSenha(iCypher.getPasswordEncoder().encode(usuario.getSenha()));
-        Corretora corretora = iCorretoraService.findById(usuario.getCorretoraId());
-        novoUsuario.setCorretora(corretora);
-        Perfil perfil = iPerfilService.findById(usuario.getPerfilId());
-        novoUsuario.setPerfil(perfil);
+        Optional<Corretora> corretora = iCorretoraService.findById(usuario.getCorretoraId());
+        if(!corretora.isPresent()){
+            throw new RegraDeNegocioException("Corretora não encontrado","UsuarioService.create");
+        }
+        novoUsuario.setCorretora(corretora.get());
+        Optional<Perfil> perfil = iPerfilService.findById(usuario.getPerfilId());
+        if(!perfil.isPresent()){
+            throw new RegraDeNegocioException("Perfil não encontrado","UsuarioService.create");
+        }
+        novoUsuario.setPerfil(perfil.get());
         return cleanPasswordAndSalt(usuarioRepository.save(novoUsuario));
     }
 
