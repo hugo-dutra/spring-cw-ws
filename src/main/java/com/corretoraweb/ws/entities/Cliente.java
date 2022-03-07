@@ -42,13 +42,6 @@ public class Cliente {
     @Length(max = 500, min = 1, message = "nome: deve ter entre 1 e 500 caracteres")
     @Column(name = "clt_nome_txt", length = 500)
     private String nome;
-    @CpfCnpj
-    @Length(min = 11, max = 14, message = "cpfCnpj: deve ter entre 11 e 14 caracteres")
-    @Column(name = "clt_cpf_cnpj_txt", length = 14)
-    private String cpfCnpj;
-    @NotNull(message = "pessoaFisica: Não pode ser nulo")
-    @Column(name = "clt_pessoaFisica_bit")
-    private Boolean pessoaFisica;
     /*****RELACIONAMENTOS****/
     @ToString.Exclude
     @EqualsAndHashCode.Exclude
@@ -70,6 +63,16 @@ public class Cliente {
     @ManyToOne
     @JoinColumn(name = "usr_id_int")
     private Usuario usuario;
+    @ToString.Exclude
+    @EqualsAndHashCode.Exclude
+    @OneToMany(mappedBy = "cliente")
+    @JsonIgnore
+    private List<ClienteFisica> clienteFisicas;
+    @ToString.Exclude
+    @EqualsAndHashCode.Exclude
+    @OneToMany(mappedBy = "cliente")
+    @JsonIgnore
+    private List<ClienteJuridica> clienteJuridicas;
 }
 
 

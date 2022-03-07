@@ -35,8 +35,6 @@ public class ClienteService implements IClienteService {
         novoCliente.setUf(clienteCreateDTO.getUf());
         novoCliente.setEmail(clienteCreateDTO.getEmail());
         novoCliente.setNome(clienteCreateDTO.getNome());
-        novoCliente.setCpfCnpj(clienteCreateDTO.getCpfCnpj());
-        novoCliente.setPessoaFisica(clienteCreateDTO.getPessoaFisica());
         novoCliente.setCorretora(corretora.get());
         return iClienteRepository.save(novoCliente);
     }
@@ -75,8 +73,6 @@ public class ClienteService implements IClienteService {
         clienteAlterado.setUf(clienteUpdateDTO.getUf());
         clienteAlterado.setEmail(clienteUpdateDTO.getEmail());
         clienteAlterado.setNome(clienteUpdateDTO.getNome());
-        clienteAlterado.setCpfCnpj(clienteUpdateDTO.getCpfCnpj());
-        clienteAlterado.setPessoaFisica(clienteUpdateDTO.getPessoaFisica());
         clienteAlterado.setId(clienteAlterado.getId());
         return iClienteRepository.save(clienteAlterado);
     }
