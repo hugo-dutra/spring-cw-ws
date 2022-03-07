@@ -11,6 +11,8 @@ import javax.validation.constraints.Size;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
+@EqualsAndHashCode
+@ToString
 @Entity
 @Table(name = "cliente_fisica_clf", schema = "corretora_web")
 public class ClienteFisica {

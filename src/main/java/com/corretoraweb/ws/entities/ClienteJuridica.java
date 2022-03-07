@@ -11,6 +11,8 @@ import javax.validation.constraints.Size;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
+@EqualsAndHashCode
+@ToString
 @Entity
 @Table(name = "cliente_juricia_clj", schema = "corretora_web")
 public class ClienteJuridica {
@@ -26,6 +28,4 @@ public class ClienteJuridica {
     @ManyToOne
     @JoinColumn(name = "clt_id_int", nullable = false)
     private Cliente cliente;
-
-
 }
