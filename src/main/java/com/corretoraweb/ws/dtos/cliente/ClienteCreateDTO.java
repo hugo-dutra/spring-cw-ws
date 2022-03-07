@@ -22,11 +22,6 @@ public class ClienteCreateDTO {
     private String email;
     @Length(max = 500, min = 1)
     private String nome;
-    @Length(min = 11, max = 14)
-    @CpfCnpj
-    private String cpfCnpj;
-    @NotNull
-    private Boolean pessoaFisica;
     @NotNull
     private Long corretora;
 }

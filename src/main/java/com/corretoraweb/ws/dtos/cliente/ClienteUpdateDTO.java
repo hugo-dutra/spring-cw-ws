@@ -24,11 +24,6 @@ public class ClienteUpdateDTO {
     private String email;
     @Length(max = 500, min = 1, message = "nome: deve ter entre 1 e 500 caracteres")
     private String nome;
-    @Length(min = 11, max = 14, message = "cpfCnpj: deve ter entre 11 e 14 caracteres")
-    @CpfCnpj(message = "CPF ou CNPJ inválido")
-    private String cpfCnpj;
-    @NotNull(message = "pessoa física não pode ser nulo")
-    private Boolean pessoaFisica;
 }
 
 
