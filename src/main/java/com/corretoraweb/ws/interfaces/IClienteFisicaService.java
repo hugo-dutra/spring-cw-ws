@@ -11,6 +11,6 @@ public interface IClienteFisicaService {
     public ClienteFisica create(ClienteFisicaCreateDTO clienteFisicaCreateDTO);
     public ClienteFisica update(ClienteFisicaUpdateDTO clienteFisicaUpdateDTO);
     public Optional<ClienteFisica> findById(Long ClinenteFisicaId);
-    public List<ClienteFisica> findByCorretoraId(Long corretoraId);
+    public List<ClienteFisica> findByClienteId(Long clienteId);
     public void delete(Long clienteFisicaId);
 }
