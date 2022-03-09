@@ -43,15 +43,14 @@ public class ComissaoController {
     @GetMapping("/{comissaoId}")
     public ResponseEntity<Comissao> findById(@PathVariable Long comissaoId) {
         Optional<Comissao> comissao = iComissaoService.findById(comissaoId);
-        return (!comissao.isPresent()) ?
-                ResponseEntity.notFound().build() :
-                ResponseEntity.ok(comissao.get());
+        return comissao.map(ResponseEntity::ok)
+                .orElseGet(()->ResponseEntity.notFound().build());
     }
 
     @GetMapping("/contrato/{contratoId}")
     public ResponseEntity<List<Comissao>> findByContratoId(@PathVariable Long contratoId) {
         List<Comissao> comissao = iComissaoService.findByContratoId(contratoId);
-        return (comissao.size() == 0) ?
+        return comissao.size() == 0 ?
                 ResponseEntity.notFound().build() :
                 ResponseEntity.ok(comissao);
     }
