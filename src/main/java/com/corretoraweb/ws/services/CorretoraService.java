@@ -1,5 +1,7 @@
 package com.corretoraweb.ws.services;
 
+import com.corretoraweb.ws.dtos.corretora.CorretoraCreateDTO;
+import com.corretoraweb.ws.dtos.corretora.CorretoraUpdateDTO;
 import com.corretoraweb.ws.entities.Corretora;
 import com.corretoraweb.ws.exceptions.RegraDeNegocioException;
 import com.corretoraweb.ws.interfaces.ICorretoraService;
@@ -16,23 +18,28 @@ public class CorretoraService implements ICorretoraService {
 
     private final ICorretoraRepository iCorretoraRepository;
 
-    public Corretora create(Corretora corretora) {
-        return iCorretoraRepository.save(corretora);
+    public Corretora create(CorretoraCreateDTO corretoraCreateDTO) {
+        Corretora novaCorretora = new Corretora();
+        novaCorretora.setNome(corretoraCreateDTO.getNome());
+        novaCorretora.setEmail(corretoraCreateDTO.getEmail());
+        novaCorretora.setTelefone(corretoraCreateDTO.getTelefone());
+        return iCorretoraRepository.save(novaCorretora);
     }
 
     public List<Corretora> findAll() {
         return iCorretoraRepository.findAll();
     }
 
-    public Corretora update(Corretora corretora){
-        Optional<Corretora> corretoraOptional = iCorretoraRepository.findById(corretora.getId());
+    public Corretora update(CorretoraUpdateDTO corretoraUpdateDTO){
+        Optional<Corretora> corretoraOptional = iCorretoraRepository.findById(corretoraUpdateDTO.getId());
         if(!corretoraOptional.isPresent()){
             throw new RegraDeNegocioException("Corretora não encontrada","CorretoraService.update");
         }
         Corretora corretoraAlterada = corretoraOptional.get();
-        corretoraAlterada.setEmail(corretora.getEmail());
-        corretoraAlterada.setNome(corretora.getNome());
-        corretoraAlterada.setTelefone(corretora.getTelefone());
+        corretoraAlterada.setId(corretoraUpdateDTO.getId());
+        corretoraAlterada.setEmail(corretoraUpdateDTO.getEmail());
+        corretoraAlterada.setNome(corretoraUpdateDTO.getNome());
+        corretoraAlterada.setTelefone(corretoraUpdateDTO.getTelefone());
         return iCorretoraRepository.save(corretoraAlterada);
     }
 

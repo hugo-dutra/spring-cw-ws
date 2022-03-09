@@ -1,5 +1,7 @@
 package com.corretoraweb.ws.controllers;
 
+import com.corretoraweb.ws.dtos.corretora.CorretoraCreateDTO;
+import com.corretoraweb.ws.dtos.corretora.CorretoraUpdateDTO;
 import com.corretoraweb.ws.entities.Corretora;
 import com.corretoraweb.ws.interfaces.ICorretoraService;
 import lombok.RequiredArgsConstructor;
@@ -28,15 +30,15 @@ public class CorretoraController {
 
     @PostMapping
     @ResponseStatus(CREATED)
-    public ResponseEntity<Corretora> create(@RequestBody Corretora corretora) {
-        Corretora novaCorretora = iCorretoraService.create(corretora);
+    public ResponseEntity<Corretora> create(@RequestBody CorretoraCreateDTO corretoraCreateDTO) {
+        Corretora novaCorretora = iCorretoraService.create(corretoraCreateDTO);
         return ResponseEntity.ok(novaCorretora);
     }
 
     @PutMapping
     @ResponseStatus(CREATED)
-    public ResponseEntity<Corretora> update(@RequestBody Corretora corretora){
-        Corretora corretoraAlterada = iCorretoraService.update(corretora);
+    public ResponseEntity<Corretora> update(@RequestBody CorretoraUpdateDTO corretoraUpdateDTO){
+        Corretora corretoraAlterada = iCorretoraService.update(corretoraUpdateDTO);
         return ResponseEntity.ok(corretoraAlterada);
     }
 

@@ -5,7 +5,8 @@ import lombok.Setter;
 
 @Getter
 @Setter
-public class CorretoraCreateDTO {
+public class CorretoraUpdateDTO {
+    private Long id;
     private String nome;
     private String email;
     private String telefone;
