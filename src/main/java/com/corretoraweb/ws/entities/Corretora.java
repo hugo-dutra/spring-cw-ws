@@ -83,4 +83,9 @@ public class Corretora {
     @JsonIgnore
     private List<TipoComissao> tiposComissoes;
 
+    public Corretora(String nome, String email, String telefone) {
+        this.nome = nome;
+        this.email = email;
+        this.telefone = telefone;
+    }
 }

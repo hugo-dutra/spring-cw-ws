@@ -14,4 +14,5 @@ public interface ICorretoraService {
     public void delete(Long id);
     public Optional<Corretora> findById(Long corretoraId);
     public Optional<Boolean> existsByEmail(String email);
+    public void deleteAll();
 }

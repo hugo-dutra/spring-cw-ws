@@ -56,6 +56,11 @@ public class CorretoraService implements ICorretoraService {
     }
 
     @Override
+    public void deleteAll() {
+        iCorretoraRepository.deleteAll();
+    }
+
+    @Override
     public Optional<Corretora>  findById(Long corretoraId) {
         Optional<Corretora> corretora = iCorretoraRepository.findById(corretoraId);
         if(!corretora.isPresent()){
