@@ -51,6 +51,10 @@ public class CorretoraService implements ICorretoraService {
         iCorretoraRepository.deleteById(id);
     }
 
+    public Optional<Boolean> existsByEmail(String email){
+        return iCorretoraRepository.existsByEmail(email);
+    }
+
     @Override
     public Optional<Corretora>  findById(Long corretoraId) {
         Optional<Corretora> corretora = iCorretoraRepository.findById(corretoraId);

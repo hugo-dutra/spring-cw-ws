@@ -9,6 +9,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 import static org.springframework.http.HttpStatus.*;
 
@@ -26,6 +27,13 @@ public class CorretoraController {
         return corretoras.size() == 0 ?
                 ResponseEntity.notFound().build() :
                 ResponseEntity.ok(corretoras);
+    }
+
+    @GetMapping("/exists/{email}")
+    @ResponseStatus(OK)
+    public ResponseEntity<Boolean> existsByEmail(@PathVariable String email){
+        Optional<Boolean> corretora = iCorretoraService.existsByEmail(email);
+        return ResponseEntity.ok(corretora.get());
     }
 
     @PostMapping
